@@ -18,8 +18,12 @@ const flightSchema = new Schema({
   },
   departs: {
     type: Date,
+    default: function() {
+      let today = new Date();
+      return today.setFullYear(today.getFullYear() + 1);
+    }
     
   }
 });
 
-module.exports = mongoose.model('Flight', movieSchema);
+module.exports = mongoose.model('Flight', flightSchema);
