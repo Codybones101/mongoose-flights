@@ -6,6 +6,9 @@ var flight = require('../models/flight');
 
 
 router.get('/', flightsCtrl.index);
+router.get('/new', flightsCtrl.newFlight);
+router.get('/:id', flightsCtrl.show);
+router.post('/', flightsCtrl.create);
 
 
 
