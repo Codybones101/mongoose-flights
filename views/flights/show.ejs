@@ -26,5 +26,85 @@
     </tbody>
   </table>
 </div>
+<div style="margin-top: 10vmin">
+  <h3 style="text-align: center">Add A Destination</h3>
+  <form
+    action="/flights/<%= flight._id %>"
+    method="POST"
+    class="align-items-center p-3"
+  >
+    <label> Destination City </label>
+    <select name="airport">
+      <option value="AUS">AUS</option>
+      <option value="DFW">DFW</option>
+      <option value="SAN">SAN</option>
+      <option value="JFK">JFK</option>
+      <option value="ORD">ORD</option>
+    </select>
+    <label>
+      <input
+        name="arrival"
+        type="datetime-local"
+        value="<% flight.destinations.departsDate %>"
+      />
+    </label>
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<div>
+  <% if(flight.destinations.length) { %>
+    <h3 style="text-align: center; margin-top: 10vmin">All Destinations</h3>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th>Arrival</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.destinations.sort((a, b) => a.arrival - b.arrival ) %>
+        <% flight.destinations.forEach(function(d) { %>
+          <tr>
+            <td><%= d.airport %></td>
+            <td><%= d.arrival %></td>
+          </tr>
+        <% }) %>
+<%  } %>
+</div>
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Seat</td>
+        <td>Price</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% tickets.forEach(function(ticket) { %>
+        <tr>
+          <td><%= ticket.seat %></td>
+          <td><%= ticket.price %></td>
+        </tr>
+     <% }) %>
+    </tbody>
+  </table>
+</div>
+<div>
+
+  <div>
+    <form action="/flights/<%= flight._id %>/tickets" method="POST">
+      Seat Assignment
+      <label>
+        <input name="seat" />
+      </label>
+      <label for="">
+        Price
+        <input name="price" />
+      </label>
+      <button type="submit">Add</button>
+    </form>
+  </div>
+ 
   
 <%- include('../partials/footer') %>
